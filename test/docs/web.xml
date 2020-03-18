@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:javaee="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+>
+  
+   <context-param>
+   <param-name>
+      org.apache.tiles.impl.BasicTilesContainer.DEFINITIONS_CONFIG
+   </param-name>
+   <param-value>
+		/WEB-INF/tiles.xml
+   </param-value>
+   </context-param>
+   
+    <display-name>Struts 2</display-name>
+   <welcome-file-list>
+      <welcome-file>loginLDAP.jsp</welcome-file>
+   </welcome-file-list>
+  
+    <filter>
+      <filter-name>struts2</filter-name>
+      <filter-class>
+         org.apache.struts2.dispatcher.FilterDispatcher
+      </filter-class>
+   </filter>
+   <listener>
+        <listener-class>com.ctl.simulator.listener.SimulatorListener</listener-class>
+    </listener>
+  
+  
+   <listener>
+        <listener-class>org.apache.struts2.tiles.StrutsTilesListener</listener-class>
+	</listener>
+  
+  <listener>
+    <javaee:listener-class>
+      org.araneaframework.http.core.StandardSessionListener
+    </javaee:listener-class>
+  </listener>
+  <servlet>
+		<display-name>Rx-Http Servlet</display-name>
+		<servlet-name>RxHttpServlet</servlet-name>
+		<servlet-class>com.ctl.simulation.http.RxHttpServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+	
+		<servlet-name>RxHttpServlet</servlet-name>
+		<url-pattern>/services/*</url-pattern>
+	</servlet-mapping>
+	
+     <filter-mapping>
+      <filter-name>struts2</filter-name>
+      <url-pattern>/*</url-pattern>
+   </filter-mapping>
+  	
+  	<context-param>
+		<param-name>contextConfigLocation</param-name>		
+		<param-value>/WEB-INF/context.xml</param-value>	
+	</context-param>
+  	
+</web-app>

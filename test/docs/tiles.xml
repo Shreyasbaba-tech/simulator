@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+        <definition name="baseLayout" template="MainPage_01.jsp">
+                <put-attribute name="title" value="Application Virtualization" />
+                <put-attribute name="header" value="/Header.jsp" />
+                <put-attribute name="body" value="/HomePage.jsp" />
+                <put-attribute name="footer" value="/Footer.jsp" />
+        </definition>
+        
+        <definition name="ViewServiceUsageGraph" extends="baseLayout">
+                <put-attribute name="body" value="/ViewServiceUsageGraph.jsp" />
+        </definition>
+        <definition name="ViewServiceCreationGraph" extends="baseLayout">
+                <put-attribute name="body" value="/ViewServiceCreationGraph.jsp" />
+        </definition>
+        <definition name="ViewAppUsageGraph" extends="baseLayout">
+                <put-attribute name="body" value="/ViewAppUsageGraph.jsp" />
+        </definition>
+        
+        <definition name="showContextDetail" extends="baseLayout">
+                <put-attribute name="body" value="/SuccessCommonPage.jsp" />
+        </definition>
+        
+        <definition name="ViewServiceContext" extends="baseLayout">
+                <put-attribute name="body" value="/ViewServiceContext.jsp" />
+        </definition>
+        
+        <definition name="ListJMSResponse" extends="baseLayout">
+                <put-attribute name="body" value="/ListJMSResponse.jsp" />
+        </definition>
+        
+        <definition name="LoadJMSResponse" extends="baseLayout">
+                <put-attribute name="body" value="/LoadJMSResponse.jsp" />
+        </definition>
+        
+        <definition name="AddJMSResponse" extends="baseLayout">
+                <put-attribute name="body" value="/AddJMSResponse.jsp" />
+        </definition>
+        
+        <definition name="AddNewJMSResponse" extends="baseLayout">
+                <put-attribute name="body" value="/AddNewJMSResponse.jsp" />
+        </definition>
+        
+        <definition name="EditJMSResponse" extends="baseLayout">
+                <put-attribute name="body" value="/EditJMSResponse.jsp" />
+        </definition>
+        
+        <definition name="AddJMSService" extends="baseLayout">
+            <put-attribute name="body" value="/AddJMSService.jsp" />
+        </definition>
+        
+        <definition name="AddJMSServiceSuccess" extends="baseLayout">
+            <put-attribute name="body" value="/SuccessCommonPage.jsp" />
+        </definition>
+        
+        <definition name="AddBulkServicePage" extends="baseLayout">
+                <put-attribute name="body" value="/AddBulkServicePage.jsp" />
+        </definition>
+        
+        <definition name="AddServicePage_01" extends="baseLayout">
+                <put-attribute name="body" value="/AddServicePage_01.jsp" />
+        </definition>
+        
+         <definition name="AddServicePage_02" extends="baseLayout">
+                <put-attribute name="body" value="/AddServicePage_02.jsp" />
+        </definition>
+        
+        <definition name="AddComplexServicePage" extends="baseLayout">
+                <put-attribute name="body" value="/AddComplexServicePage.jsp" />
+        </definition>
+        
+         <definition name="AddServiceFailure" extends="baseLayout">
+                <put-attribute name="body" value="AddServiceFailure.jsp" />
+        </definition>
+        
+         <definition name="AddServiceSuccess" extends="baseLayout">
+                <put-attribute name="body" value="/AddServiceSuccess.jsp" />
+        </definition>
+        
+        <definition name="literalXml" extends="baseLayout">
+                <put-attribute name="body" value="/LiteralXmlForm.jsp" />
+        </definition>
+        
+         <definition name="literalXmlForm02" extends="baseLayout">
+                <put-attribute name="body" value="/LiteralXmlForm02.jsp" />
+        </definition>
+        <definition name="literalXmlForm03" extends="baseLayout">
+                <put-attribute name="body" value="/LiteralXmlForm03.jsp" />
+        </definition>
+        
+        <definition name="AddResponseSuccess" extends="baseLayout">
+                <put-attribute name="body" value="/AddResponseSuccess.jsp" />
+        </definition>
+          <definition name="AddResponseFailure" extends="baseLayout">
+                <put-attribute name="body" value="/AddResponseFailed.jsp" />
+        </definition>
+
+
+        <definition name="EditResponseSuccess" extends="baseLayout">
+                <put-attribute name="body" value="/EditResponseSuccess.jsp" />
+        </definition>
+          <definition name="EditResponseFailure" extends="baseLayout">
+                <put-attribute name="body" value="/EditResponseFailed.jsp" />
+        </definition>
+                
+         <definition name="searchPage" extends="baseLayout">
+                <put-attribute name="body" value="/Search.jsp" />
+        </definition>
+        <definition name="SearchSuccess" extends="baseLayout">
+                <put-attribute name="body" value="/SearchjSuccess.jsp" />
+        </definition>
+        
+         <definition name="applyResiliency" extends="baseLayout">
+                <put-attribute name="body" value="/AddControl.jsp" />
+        </definition>
+        
+        <definition name="captureUtil" extends="baseLayout">
+                <put-attribute name="body" value="/CaptureSimulationXml.jsp" />
+        </definition>
+        
+        <definition name="customizeResponses" extends="baseLayout">
+                <put-attribute name="body" value="/CustomizeResponses.jsp" />
+        </definition>
+        
+        <definition name="GetXmlSuccess" extends="baseLayout">
+                <put-attribute name="body" value="/GetXmlSuccess.jsp" />
+        </definition>
+        
+        <definition name="GetXmlFailure" extends="baseLayout">
+                <put-attribute name="body" value="/GetXmlFailure.jsp" />
+        </definition>
+        
+        <definition name="XmlDumpSuccess" extends="baseLayout">
+                <put-attribute name="body" value="/XmlDumpSuccess.jsp" />
+        </definition>
+        
+        <definition name="XmlDumpFailure" extends="baseLayout">
+                <put-attribute name="body" value="/XmlDumpFailure.jsp" />
+        </definition>
+        
+        <definition name="applyResiliencySuccess" extends="baseLayout">
+                <put-attribute name="body" value="/AddControlSuccess.jsp" />
+        </definition>
+        
+         <definition name="servicePresent" extends="baseLayout">
+                <put-attribute name="body" value="/servicePresentDetails.jsp" />
+        </definition>
+        
+         <definition name="CustomizedResponsesFinal" extends="baseLayout">
+                <put-attribute name="body" value="/CustomizedResponsesFinal.jsp" />
+        </definition>
+        
+        <definition name="CustomizedResponsesSuccessPage" extends="baseLayout">
+                <put-attribute name="body" value="/CustomizedResponsesSuccessPage.jsp" />
+        </definition>
+        
+         <definition name="CustomizedResponsesFailurePage" extends="baseLayout">
+                <put-attribute name="body" value="/CustomizedResponsesFailurePage.jsp" />
+        </definition>
+        
+        <definition name="SaveResponseAsNew" extends="baseLayout">
+                <put-attribute name="body" value="/SaveResponseAsNew.jsp" />
+        </definition>
+
+         <definition name="XmlTreeStructure" extends="baseLayout">
+                <put-attribute name="body" value="/XmlTree.jsp" />
+        </definition>
+                 
+        <definition name="repositorySummary" extends="baseLayout">
+                <put-attribute name="body" value="/RepositorySummary.jsp" />
+        </definition>    
+        
+        <definition name="SystemReport" extends="baseLayout">
+                <put-attribute name="body" value="/SystemReport.jsp" />
+        </definition> 
+        
+        <definition name="SubSystemReport" extends="baseLayout">
+                <put-attribute name="body" value="/SubSystemReport.jsp" />
+        </definition> 
+        
+        <definition name="ResponseReport" extends="baseLayout">
+                <put-attribute name="body" value="/ResponseReport.jsp" />
+        </definition> 
+        
+         <definition name="takeResponseBackup" extends="baseLayout">
+                <put-attribute name="body" value="/TakeResponseBackup.jsp" />
+        </definition> 
+        
+         <definition name="BackupSuccess" extends="baseLayout">
+                <put-attribute name="body" value="/BackupSuccess.jsp" />
+        </definition> 
+        
+        <definition name="adminUtils" extends="baseLayout">
+                <put-attribute name="body" value="/Admin_Page.jsp" />
+        </definition> 
+        <definition name="createUserAccessPermission" extends="baseLayout">
+                <put-attribute name="body" value="/createUserAccessPermission_Admin.jsp" />
+        </definition>         
+        
+</tiles-definitions>
