@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="AppVirtualWebFormGenerator" default="build" basedir=".">
+    <description>Ant Build Script for AppVirtualWebFormGenerator Project</description>
+    <target name="build" depends="init, clean, compile, AppVirtualWebFormGeneratorwar" description="Builds a jar file" />
+	<target name="buildJar" depends="init, clean, compile, AppVirtualWebFormGeneratorjar" description="Builds a jar file" />
+
+	<target name="init">
+		<property environment="env" />
+		<property file="build.properties" />
+		<property file="${thirdparty.properties}" />
+		<property name="ant.dir" value="${env.ANT_HOME}/lib" />
+		<property name="dist.dir" value="${dist.dir}"/>
+		<path id="project.class.path">
+			<pathelement location="${env.JAVA_HOME}/lib/tools.jar" />
+			<fileset dir="${ant.dir}">
+			     <include name="**/*.jar" />
+			</fileset>
+			<pathelement location="${accesscontrol.jar}" />
+			<pathelement location="${jxl-2.6.3.jar}" />
+			<pathelement location="${activemq.jar}" /> 
+			
+			<fileset dir="../../AppVirtualWebFormGenerator/WebContent/WEB-INF/lib/">
+				<include name="**/*.jar"/>
+            </fileset>
+			<fileset dir="../../AppVirtualWebFormGenerator/WebContent/WEB-INF/lib/bus/">
+					<include name="**/*.jar"/>
+			</fileset>
+			<fileset dir="../../AppVirtualWebFormGenerator/WebContent/WEB-INF/lib/commons/">
+					<include name="**/*.jar"/>
+							
+			</fileset>
+			<fileset dir="../../AppVirtualWebFormGenerator/WebContent/WEB-INF/lib/junit/">
+					<include name="**/*.jar"/>
+			</fileset>
+			<fileset dir="../../AppVirtualWebFormGenerator/WebContent/WEB-INF/lib/loggers">
+					<include name="**/*.jar"/>
+			</fileset>
+
+			
+						
+			<fileset dir="../../AppVirtualWebFormGenerator/WebContent/WEB-INF/lib/spring/">
+					<include name="**/*.jar"/>
+			</fileset>
+			
+			<fileset dir="../../AppVirtualWebFormGenerator/WebContent/WEB-INF/lib/velocity/">
+								<include name="**/*.jar"/>
+			</fileset>
+						
+			
+						
+			<fileset dir="../../AppVirtualWebFormGenerator/WebContent/WEB-INF/lib/xml_parsers/">
+					<include name="**/*.jar"/>
+			</fileset>
+			
+			<fileset dir="../../AppVirtualWebFormGenerator/WebContent/WEB-INF/lib/exec/">
+							<include name="**/*.jar"/>
+					</fileset>
+		
+						
+							
+		</path>
+
+		<property name="projectClassPath" refid="project.class.path" />
+
+		<echo message="PATH: ${env.Path} " />
+		<echo message="CLASSPATH: ${env.CLASSPATH} " />
+		<echo message="PROJ_CLASSPATH: ${projectClassPath}" />
+		<echo message="JAVA_HOME: ${env.JAVA_HOME} " />
+		<echo message="ANT Java Version : ${ant.java.version} " />
+		<echo message="ANT Version : ${ant.version} " />
+		<echo message="PROJ_HOME: ${proj.dir} " />
+
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${dist.dir}" />
+
+	</target>
+
+	<target name="clean" depends="init" description="Deletes all files in build/dist directories">
+		<delete includeEmptyDirs="true">
+				<fileset dir="${build.dir}">
+					<include name="**/*" />
+				</fileset>
+				<fileset dir="${dist.dir}">
+					<include name="**/${jar.name}" />
+				</fileset>
+		</delete>
+	</target>
+	
+	
+
+	<target name="compile">
+		 <property name="compile.deprecation" value="false"/>
+	    <echo message="compiling"/>
+		<javac srcdir="${src.dir}" destdir="${build.dir}" debug="true" nowarn="true" classpathref="project.class.path">
+			<src path="${src.dir}" />
+			<include name="**/*.java" />
+			<exclude name="**/unittest/**" />
+		</javac>
+	</target>
+
+	
+	<target name="AppVirtualWebFormGeneratorwar">
+		
+		<copy todir="${web.dd.dir}/classes">
+				<fileset dir="../web-info">
+					<include name="**/struts.xml" />
+				</fileset>
+			</copy>
+		
+		<war destfile="${dist.dir}/${web.war}" webxml="../WebContent/WEB-INF/web.xml">
+			
+
+			
+			
+			
+			<fileset dir="${container.dir}" >
+				<include name="**/*.*" />
+			</fileset>
+		
+
+			<webinf dir="${web.dd.dir}">
+				<include name="web.xml" />
+				
+			</webinf>
+
+	
+
+			<lib dir="${web.dd.dir}/lib">
+				<include name="*.jar" />
+			</lib>
+	
+			
+		</war>
+	</target>
+
+	
+	<target name="jar" depends="compile">
+		<jar jarfile="${dist.dir}/${web.war}">
+			<fileset dir="${build.dir}">
+				<include name="**/*.class" />
+			</fileset>
+			<fileset dir="${src.dir}">
+				<include name="**/*.java" />
+				<include name="**/*.properties" />
+				<exclude name="**/unittests/**" />
+			</fileset>
+		</jar>
+      <copy file="${dist.dir}/${web.war}" todir="${stage.dir}" />	
+	</target>
+
+	
+	<target name="AppVirtualWebFormGeneratorjar" depends="compile">
+			<jar jarfile="${dist.dir}/AppVirtualWebFormGenerator.jar">
+				<fileset dir="${build.dir}">
+					<include name="**/*.class" />
+				</fileset>
+				<fileset dir="${src.dir}">
+					<include name="**/*.java" />
+					<include name="**/*.properties" />
+					<exclude name="**/unittests/**" />
+				</fileset>
+			</jar>
+	</target>
+
+	
+		
+	
+</project>
