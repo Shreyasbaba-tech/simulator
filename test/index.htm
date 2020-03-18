@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>BubbleTip Demo</title>
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js" type="text/javascript"></script>
+	
+	<script src="js/jQuery.bubbletip-1.0.6.js" type="text/javascript"></script>
+	<link href="js/bubbletip/bubbletip.css" rel="stylesheet" type="text/css" />
+	<!--[if IE]>
+	<link href="js/bubbletip/bubbletip-IE.css" rel="stylesheet" type="text/css" />
+	<![endif]-->
+	
+	<style type="text/css">
+		/* p, h4, li
+		{
+			font-family: Arial, Tahoma, Verdana;
+		} */
+		pre.tip
+		{
+			margin: 0px;
+			padding: 5px;
+			font-size: 0.9em;	
+		}
+		pre.code
+		{
+			margin: 0px;
+			padding: 20px;
+			border: solid 1px #CCC;
+			font-size: 1.0em;
+		}
+		em 
+		{
+			font-size: 0.9em;
+			color: #777777;
+	</style>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*$('#a1_up').bubbletip($('#tip1_up'));*/
+
+			$('#a1_down').bubbletip($('#tip1_down'), {
+				deltaDirection: 'down',
+				deltaPosition: 50,
+				offsetTop: 20
+			});
+			/*$('#a1_left').bubbletip($('#tip1_left'), {
+				deltaDirection: 'left',
+				animationDuration: 100,
+				offsetLeft: -20
+			});
+			$('#a1_right').bubbletip($('#tip1_right'), { deltaDirection: 'right' });
+			$('#a1_trigger').bubbletip($('#tip1_trigger1'), { positionAtElement: $('#a1_target') });
+
+			$('#a_unbind').bubbletip($('#tip1_trigger2_unbind'));
+			$('#a_unbind').bind('click', function(event) {
+				$('#a1_trigger').removeBubbletip($('#tip1_trigger2'));
+				event.preventDefault();
+			});
+			$('#a_bind').bubbletip($('#tip1_trigger2_bind'));
+			$('#a_bind').bind('click', function(event) {
+				$('#a1_trigger').bubbletip($('#tip1_trigger2'), {
+					positionAtElement: $('#a1_target'),
+					deltaDirection: 'down',
+					delayShow: 500,
+					delayHide: 1000
+				});
+				event.preventDefault();
+			});
+
+			$('#inpText').bubbletip($('#tip1_focusblur'), {
+				deltaDirection: 'right',
+				bindShow: 'focus',
+				bindHide: 'blur'
+			});*/
+		});
+	</script>
+</head>
+<body>
+	<div id="bubbletipanchor"></div>
+	
+<p>MOUSEOVER to open a tooltip 
+	<a id="a1_down" href="#">below</a></p>
+<div id="tip1_down" style="display:none;scrollable:true;" >
+
+<textarea rows="" cols="" ></textarea>
+</div>
+
+
+
+
+</body>
+</html>
