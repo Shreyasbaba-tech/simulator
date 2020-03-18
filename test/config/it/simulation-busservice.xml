@@ -1,0 +1,22 @@
+<BusConnector>
+	<BusProcessor name="RX_SIMULATION_SVC"
+		class="com.ctl.simulation.bus.SimulatorBusProcessor">
+		<Attribute name="topic" type="String">Q.*.*.*.*.PROBH119.*</Attribute>
+		<Attribute name="worker.min" type="Integer">2</Attribute>
+		<Attribute name="worker.max" type="Integer">5</Attribute>
+		<BusPolicy name="RxBusProcessorPolicy">
+			<Attribute name="guaranteed" type="Boolean">false</Attribute>
+		</BusPolicy>
+	</BusProcessor>
+	<BusTopic name="DEFAULT" class="com.qwest.bus.TibrvBusHandler">
+		<Attribute name="service" type="Array">
+			
+			<!--  entry type="URI">rvd://10.140.1.162:7500/10.140.1.162:7500</entry -->
+			
+	
+			<entry type="URI">rvd://;239.85.2.3:8523/omahft3:8523</entry>
+		
+		</Attribute>
+	</BusTopic>
+	<Attribute name="Account" type="String">rxsimulation</Attribute>
+</BusConnector>

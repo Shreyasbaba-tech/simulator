@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="no" default-dependency-check="none" default-lazy-init="false">
+<import resource="/simulators/vcsr-simulator-context.xml"/>
+<import resource="/simulators/ecsr-simulator-context.xml"/>
+<import resource="simulators/bosscars-simulator-context.xml" />
+</beans>

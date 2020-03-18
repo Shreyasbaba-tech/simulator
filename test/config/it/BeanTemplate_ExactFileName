@@ -1,0 +1,9 @@
+						</map>
+					</property>
+
+					<!-- subfolder where the action related files are kept -->
+					<property name="actionFilePath" value="" />
+					<!-- filename -->
+					<property name="actionFileNames">
+						<map>
+							<entry key="exactFileName" value="$exactFileName" />

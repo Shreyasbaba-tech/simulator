@@ -1,0 +1,107 @@
+body 
+{
+    margin:0px;
+    padding:5px;
+    
+}
+
+.taskEntryDiv 
+{
+    background-color:White;
+    border: 1px solid black;
+    border-radius:5px;
+
+    
+}
+
+.ui-overflow 
+{
+    width:480px;
+    overflow:visible;  
+}
+
+.ui-content; 
+{
+    margin:0;
+    padding:5px;    
+}
+#logo h2
+{
+   text-align:center;
+    
+}
+
+.scrollingoff
+{
+    width: 85%;
+    overflow:auto;
+}
+.scrollingon
+{
+    
+    overflow:visible;
+}
+.fixwidth
+{
+    width:80%;    
+}
+
+.footerHeader
+{
+    text-align:center;
+    font-size:9px;
+    
+}
+.footerRA
+{
+    text-align:right;
+    font-size:9px;
+    padding:2px;    
+}
+.mainReport {
+    font-size: 13px;
+    color: black;
+    font-weight: bold;
+    text-align: left;
+}
+table #mainReport {
+    font-size: 13px;
+    color: black;
+    font-weight: bold;
+    text-align: left;
+    border: 0;
+    margin-left: auto;
+    margin-right: auto; 
+}
+table #mainReport tr td{
+    text-align: center;
+    border-left: 1px solid;
+	border-right: 1px solid;
+	border-bottom: 0px;
+	border-top: 0px;
+}
+table #mainReport tr:FIRST-CHILD + tr,
+table #mainReport tr:FIRST-CHILD + tr + tr + tr,
+table #mainReport tr:FIRST-CHILD + tr + tr + tr + tr + tr,
+table #mainReport tr:FIRST-CHILD + tr + tr + tr + tr + tr + tr + tr,
+table #mainReport tr:FIRST-CHILD + tr + tr + tr + tr + tr + tr + tr + tr + tr,
+table #mainReport tr:FIRST-CHILD + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr,
+table #mainReport tr:FIRST-CHILD + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr,
+table #mainReport tr:FIRST-CHILD + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr,
+table #mainReport tr:FIRST-CHILD + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr{
+    background-color: #e9f5e4;
+}
+table #mainTable tr:FIRST-CHILD + tr,
+table #mainTable tr:FIRST-CHILD + tr + tr + tr,
+table #mainTable tr:FIRST-CHILD + tr + tr + tr + tr + tr,
+table #mainTable tr:FIRST-CHILD + tr + tr + tr + tr + tr + tr + tr,
+table #mainTable tr:FIRST-CHILD + tr + tr + tr + tr + tr + tr + tr + tr + tr,
+table #mainTable tr:FIRST-CHILD + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr,
+table #mainTable tr:FIRST-CHILD + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr,
+table #mainTable tr:FIRST-CHILD + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr,
+table #mainTable tr:FIRST-CHILD + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr{
+    background-color: #e9f5e4;
+}
+table #mainTable tr:FIRST-CHILD{
+	background-color: #4da979;
+}

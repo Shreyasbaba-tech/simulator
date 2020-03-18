@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
+        "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans default-init-method="init" default-destroy-method="destroy">
+		<bean id="noOperationFilter" class="com.qwest.rx.bus.filter.NoOperationFilter" scope="singleton"/>
+		<bean id="commonRequestFilterChain" class="com.qwest.rx.bus.filter.FilterChain"    scope="singleton">
+			<property name="filterChain">
+				<list>
+        			<ref bean="noOperationFilter" />
+				</list>
+			</property>
+		</bean>
+		<bean id="commonResponseFilterChain" class="com.qwest.rx.bus.filter.FilterChain"   scope="singleton">
+			<property name="filterChain">
+				<list>
+        			<ref bean="noOperationFilter" />
+				</list>
+			</property>
+		</bean>
+		<bean id="commonBusContext" class="com.qwest.rx.bus.config.BusActionContext"   scope="prototype"/>		
+</beans>

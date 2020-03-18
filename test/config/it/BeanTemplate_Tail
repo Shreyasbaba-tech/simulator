@@ -1,0 +1,15 @@
+</map>
+					</property>
+					<!--
+					property to check whether request is in XML format or JSON format
+					-->
+					<property name="jsonFormat" value="$jsonFormat" />
+				</bean>
+
+			</list>
+		</property>
+
+		<!-- Base file path for this simulator -->
+		<property name="simulatorFilePath" value="C://Project/Simulator/Response/$systemName" />
+	</bean>
+</beans>

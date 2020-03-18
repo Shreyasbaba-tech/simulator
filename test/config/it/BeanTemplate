@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
+        "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans default-init-method="init" default-destroy-method="destroy">
+
+
+	<bean class="$simulatorClassName" id="$beanId">
+
+		<!-- list of actions -->
+		<property name="actions">
+			<list>
+				<!-- Action Bean class definition -->
+
+				<bean class="com.ctl.simulation.action.SimulatorAction" id="$secondBeanId">
+
+					<!--
+						first three properties help in checking if the action should deal
+						with the request. in case there is only one action in a simulator
+						omit these elements
+					-->
+
+					<!--
+						property to configure path of the element in the req to identify
+						action
+					-->
+					<property name="actionXpath" value="$actionXPath" />
+					<!--
+						boolean that controls if the mere presence of the actionXpath
+						element is enough for the action to match
+					-->
+					<property name="checkForActionXpathPresence" value="$isXPathCheck" />
+					<!--
+						property to hold the actionxpath value to be matched in case the
+						element value has to be matched
+					-->
+					<property name="actionXpathValue" value="$actionXpathValue" />
+
+
+					<!--
+						map containing the request param names and xpath to use to read
+						the req element
+					-->
+					<property name="defaultFile" value="default.vm" />
+
+					<property name="reqParams">
+						<!--
+							for xmls with no namespaces defined for a prefix we dont need ":"
+						-->
+						<map>

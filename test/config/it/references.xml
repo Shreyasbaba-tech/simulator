@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Config>
+	<bus>
+		<connectorSpec>it/busconnector.xml</connectorSpec>
+	</bus>
+	<bus>
+		<service>
+				<spring>
+					<context>it/bus-service-config.xml</context>
+				</spring>
+			</service>
+	</bus>
+   <environment>IT</environment>
+</Config>

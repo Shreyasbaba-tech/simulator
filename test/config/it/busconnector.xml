@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AdapterConfig>
+  <BusConfig>
+    <Service>
+      <application>RxSimulaiton</application>
+      <uri>rvd://;239.75.2.3:7523/denvzd:7523</uri>
+      <name>RX_SIMULATION_SVC</name>
+      <expirationTime>10</expirationTime>
+      <subject>Q.PROBH.PROD.RETR.PROBH111.DMOHANA.VCSR</subject>
+      <busHandler>com.qwest.bus.TibrvBusHandler</busHandler>
+      <field>DATA</field>
+    </Service>
+   </BusConfig>
+</AdapterConfig>
