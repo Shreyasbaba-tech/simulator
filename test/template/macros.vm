@@ -1,0 +1,3 @@
+#macro (createDate $currentDateFormat $additional)
+	$date.get($currentDateFormat,$additional)
+#end	
