@@ -1,0 +1,1002 @@
+
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Traffic Parrot</title>
+    <script src="./jquery-3.1.1.min.js"></script>
+    <script src="./jquery-ui-1.12.1.min.js"></script>
+    <script src="./trafficparrot.js?version=5.11.1"></script>
+    <script>
+        window.configurationRepository = new InBrowserConfigurationRepository(8081, 8083, 9093, '', 8095, 1589652391658);
+    </script>
+    <script src="./jquery-dateFormat-18-05-2015.min.js"></script>
+    <link rel="stylesheet" href="./bootstrap-3.4.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./bootstrap-3.4.1-dist/css/bootstrap-theme.min.css">
+    <script src="./bootstrap-3.4.1-dist/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="./jquery-datatables-1.10.20/datatables.min.css">
+    <link rel="stylesheet" href="./jquery-datatables-1.10.20/datatables.custom.css">
+
+    <link rel="icon" href="./tpfavico.png?version=5.11.1">
+
+    <link href="./navbar-fixed-top.css?version=5.11.1" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="./es5-shim-4.5.12.min.js"></script>
+    <script src="./html5shiv-3.7.3.min.js"></script>
+    <script src="./respond-1.4.2.min.js"></script>
+    <![endif]-->
+    <script src="./ie10-viewport-bug-workaround-03-10-2015.js"></script>
+    <script src="./js.cookie-2.1.4.min.js"></script>
+
+    <link rel="stylesheet" href="./jQuery-File-Upload-9.20.0/css/jquery.fileupload.css">
+    <script src="./jQuery-File-Upload-9.20.0/js/jquery.fileupload.js"></script>
+    <script src="./jquery-datatables-1.10.20/datatables.min.js"></script>
+
+    <link rel="stylesheet" href="./xonomy/xonomy-08.06.2018-tp.css">
+    <script src="./xonomy/xonomy-08.06.2018-tp.js"></script>
+    <script src="./vkBeautify-09.06.2018.js"></script>
+    <script src="./XmlEditor.js?version=5.11.1"></script>
+
+    <style>
+        .collapse-link a:after {
+            font-family: 'Glyphicons Halflings';
+            content: "\e114";
+            float: right;
+            color: grey;
+        }
+
+        .collapse-link a.collapsed:after {
+            content: "\e080";
+        }
+
+        .collapse-title {
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+<style>
+    .jumbotron {
+        padding-bottom: 14px;
+        padding-top: 14px;
+    }
+
+    .container .jumbotron {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .alert {
+        padding: 8px;
+        margin-bottom: 0;
+        text-align: center;
+        font-size: 16px;
+    }
+
+    .alert-dismissible .close {
+        right: 0;
+    }
+
+    .panel-heading a:after {
+        font-family: 'Glyphicons Halflings';
+        content: "\e114";
+        float: right;
+        color: grey;
+    }
+
+    .panel-heading a.collapsed:after {
+        content: "\e080";
+    }
+
+    input.long {
+        min-width: 100%;
+        margin-bottom: 5px;
+    }
+
+    input.short {
+        max-width: 10%;
+        min-width: 40px;
+    }
+
+    .scenario-dropdown {
+        margin-bottom: 10px;
+        margin-right: 20px;
+        display: inline-block;
+        white-space: nowrap;
+    }
+
+    button.add {
+        margin-left: 15px;
+    }
+
+    select.scenarios {
+        display: inline;
+    }
+
+    .alert-success {
+        margin-bottom: 10px;
+    }
+</style>
+
+<script src="./WiremockMappingToTpFormAdapter.js?version=5.11.1"></script>
+<script src="./SkeletonDropdownController.js?version=5.11.1"></script>
+
+<script>
+    $(function () {
+        new SkeletonDropdownController("skeletons", "http://" + location.hostname + ":" + location.port + "./httpSkeletons").loadDataAndAttachEventListeners();
+    });
+</script>
+
+<script src="./ScenarioDropdownController.js?version=5.11.1"></script>
+<script>
+    $(function () {
+        new ScenarioDropdownController("http://" + location.hostname + ":" + location.port + "./api/scenarios").attachEventListeners();
+    });
+</script>
+<style>
+    .choose-scenario {
+        display: inline-block;
+        padding: 10px;
+    }
+</style>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="./index.html" id="tp-version">Traffic Parrot v5.11.1</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li ><a href="./index.html">Home</a></li>
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">HTTP <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="active"><a href="./http/stub.html">Add/Edit</a></li>
+                        <li ><a href="./http/import.html">Import</a></li>
+                        <li ><a href="./http/export.html">Export</a></li>
+                        <li ><a href="./http/record.html">Record</a></li>
+                        <li ><a href="./http/passthrough.html">Passthrough</a></li>
+                        <li ><a href="./http/httpproxy.html">HTTP Proxy (Beta)</a></li>
+                        <li ><a href="./http/amazonSQS.html">Amazon SQS</a></li>
+                        <li ><a href="./http/logs.html">Logs</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown ">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">gRPC <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li ><a href="./grpc/stub.html">Add/Edit</a></li>
+                        <li ><a href="./grpc/record.html">Record</a></li>
+                        <li ><a href="./grpc/logs.html">Logs</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown ">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">JMS<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li ><a href="./jms/stub.html">Add/Edit</a>
+                        </li>
+                        <li ><a href="./jms/record.html">Record</a>
+                        </li>
+                        <li ><a href="./jms/replay.html">Replay</a>
+                        </li>
+                        <li ><a href="./jms/logs.html">Logs</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown ">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">IBM&#174; MQ<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li ><a href="./ibmMq/stub.html">Add/Edit</a>
+                        </li>
+                        <li ><a href="./ibmMq/record.html">Record</a>
+                        </li>
+                        <li ><a href="./ibmMq/replay.html">Replay</a>
+                        </li>
+                        <li ><a href="./ibmMq/logs.html">Logs</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown ">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Files<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li ><a href="./fileMessage/stub.html">Add/Edit</a>
+                        </li>
+                        <li ><a href="./fileMessage/record.html">Record</a>
+                        </li>
+                        <li ><a href="./fileMessage/replay.html">Replay</a>
+                        </li>
+                        <li ><a href="./fileMessage/logs.html">Logs</a>
+                        </li>
+                    </ul>
+                </li>
+                <li ><a href="./other.html">Other</a></li>
+                <li ><a href="./settings.html">Settings</a></li>
+                <li ><a href="./help.html">Help</a></li>
+            </ul>
+            <div class="choose-scenario">
+                <select class="form-control" id="choose-scenario">
+                            <option value="Scenario" selected>Scenario</option>
+                            <option value="Example" >Example</option>
+                </select>
+            </div>
+            <a target="_blank" href="../help.html#what-are-scenarios"><i class="glyphicon glyphicon-question-sign" title="What are scenarios?" aria-hidden="true"></i></a>
+        </div>
+    </div>
+</nav>
+
+
+
+<div class="container">
+    <ul class="breadcrumb">
+        <li><a href="./index.html">Home</a></li>
+        <li>HTTP</li>
+        <li class="active">Add/Edit</li>
+    </ul>
+
+    <div class="jumbotron">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="scenario-dropdown">
+                        <select class="form-control scenarios" id="skeletons">
+                            <!-- loaded lazily -->
+                            <option value="Load HTTP skeleton">Load HTTP skeleton</option>
+                        </select>
+                        <span class="btn btn-success fileinput-button">
+                            <i class="glyphicon glyphicon-plus"></i>
+                            <span>Import skeleton...</span>
+                            <input id="fileupload" type="file" name="files[]" multiple>
+                        </span>
+                        <a target="_blank" href="../help.html#edit-http-skeletons"><i class="glyphicon glyphicon-question-sign" title="Populate this list by configuring OpenAPI files" aria-hidden="true"></i></a>
+                    </div>
+
+<script>
+    function FlashMessageController() {
+        this.flashSuccessMessage = function (message) {
+            var dialogDescription = $("#flash-message-success-description");
+            dialogDescription.text(message);
+            var dialog = $("#flash-message-success");
+            $('html,body').animate({
+                scrollTop: dialog.offset().top - 50
+            });
+            dialog.show();
+            setTimeout(function () {
+                dialog.fadeOut(500);
+                // TODO(4/5) fix the "sleep and change"
+                setTimeout(function () {
+                    dialogDescription.text("Success");
+                }, 500);
+            }, 2000);
+        };
+
+        this.flashErrorMessage = function (message) {
+            var errorDescriptionElement = $("#flash-message-error-description");
+            errorDescriptionElement.html(message);
+            $('#flash-message-error-modal').modal('show');
+            setTimeout(function () {
+                // TODO(4/5) fix the "sleep and change"
+                setTimeout(function () {
+                    errorDescriptionElement.html = "Unknown error";
+                }, 500);
+            }, 3000);
+        };
+
+        this.flashErrorMessageXhr = function (errorMessagePrefix, xhr) {
+            var result;
+            try {
+                result = $.parseJSON(xhr.responseText).result
+            } catch (err) {
+                result = "An unknown error occurred, see logs for more details";
+            }
+            this.flashErrorMessage(errorMessagePrefix + result);
+        }
+    }
+</script>
+
+<div class="row bottom-buffer" id="flash-message-success" style="display: none">
+    <div class="col-md-12">
+        <div class="alert alert-success" role="alert">
+            <strong id="flash-message-success-description"></strong>
+        </div>
+    </div>
+</div>
+
+<style>
+    .modal-close {
+        float: right;
+        font-size: 21px;
+        font-weight: bold;
+        line-height: 1;
+        color: #000;
+        text-shadow: 0 1px 0 #fff;
+        filter: alpha(opacity=50);
+        opacity: .5;
+    }
+    .modal-close:hover,
+    .modal-close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+        filter: alpha(opacity=90);
+        opacity: .9;
+    }
+    button.modal-close {
+        -webkit-appearance: none;
+        padding: 0;
+        cursor: pointer;
+        background: transparent;
+        border: 0;
+    }
+    .tp-error-modal .modal-header,
+    .tp-error-modal .modal-footer {
+        border: none;
+    }
+</style>
+
+<div id="flash-message-error-modal" class="modal fade bs-example-modal-lg tp-error-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content alert alert-danger">
+            <div class="modal-header">
+                <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #5D0B09">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Error!</h4>
+            </div>
+            <div class="modal-body">
+                <span id="flash-message-error-description">Unknown error</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Dismiss</button>
+            </div>
+        </div>
+    </div>
+</div>                </div>
+            </div>
+
+            <div class="row">
+
+<link rel="stylesheet" href="./ladda-0.9.4/ladda-themeless.min.css">
+<script src="./ladda-0.9.4/spin.min.js"></script>
+<script src="./ladda-0.9.4/ladda.min.js"></script>
+<style>
+    .ladda-spinner div[role="progressbar"] {
+        margin-left: 10px;
+        margin-top: -12px
+    }
+</style>
+
+<script src="./EditMappingFormController.js?version=5.11.1"></script>
+<script>
+    $(function () {
+        new EditMappingFormController().attachHttpEventListeners('new', 'doNothing');
+        new XmlEditor('request', 'new').attachEditRequestXmlListeners();
+        new XmlEditor('response', 'new').attachEditResponseXmlListeners();
+    });
+</script>
+
+<form id="add-request-response-form-new" name="add-request-response-form" method="POST" action="./prime" class="edit-mapping-form">
+    <input type="hidden" name="mapping-id" id="mapping-id" value="">
+    <input type="hidden" name="mapping-name" id="mapping-name" value="">
+    <input type="hidden" name="mapping-tags" id="mapping-tags" value="">
+    <input type="hidden" name="response-body-file-name" id="response-body-file-name" value="">
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Request</h3>
+                </div>
+                <div class="panel-body">
+                    <div>
+                        <label>Request URL</label>
+                        <select name="request-url-matcher" id="request-url-matcher-new">
+                            <option value="urlEqualTo">equal to</option>
+                            <option value="urlMatching">matches regex</option>
+                            <option value="urlPathEqualTo">path equal to</option>
+                            <option value="urlPathMatching">path matches regex</option>
+                        </select>
+                        <input type="text" placeholder="e.g. /api/example" name="request-url"
+                               id="request-url-new"
+                               class="long"./>
+                    </div>
+                    <div>
+                        <label>Request method</label>
+                        <select name="request-method" id="request-method-new">
+                            <option value="ANY">ANY</option>
+                            <option value="GET">GET</option>
+                            <option value="POST">POST</option>
+                            <option value="PUT">PUT</option>
+                            <option value="HEAD">HEAD</option>
+                            <option value="OPTIONS">OPTIONS</option>
+                            <option value="DELETE">DELETE</option>
+                            <option value="CONNECT">CONNECT</option>
+                            <option value="TRACE">TRACE</option>
+                        </select>
+                    </div>
+                    <label>Request headers</label> <textarea class="form-control" rows="2" cols="60"
+                                                             name="request-headers"
+                                                             id="request-headers-new"></textarea>
+
+                    <div>
+                        <label>Request priority</label> <input type="text" name="request-priority" placeholder="e.g. 10" class="short" id="request-priority-new" data-toggle="tooltip" title="1 is highest. Default is 5 if left blank."./>
+                    </div>
+
+                    <div>
+                        <label>Request body</label>
+                        <select name="request-body-matcher" id="request-body-matcher-new">
+                            <option value="any">any</option>
+                            <option value="equalTo">equal to</option>
+                            <option value="contains">contains</option>
+                            <option value="matches">matches regexp</option>
+                            <option value="doesNotMatch">does not match regexp</option>
+                            <option value="equalToJson">equal to JSON</option>
+                            <option value="matchesJson">matches JSON</option>
+                            <option value="matchesJsonPath">matches JSONPath</option>
+                            <option value="equalToXml">equal to XML</option>
+                            <option value="matchesXml">matches XML</option>
+                            <option value="matchesXPath">matches XPath</option>
+                        </select>
+                    </div>
+
+                    <ul class="nav nav-tabs" style="margin: 5px">
+                        <li><a data-toggle="tab" href="#edit-request-xml-tab-new">XML</a></li>
+                        <li class="active"><a data-toggle="tab" href="#edit-request-raw-tab-new">Raw</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="edit-request-xml-tab-new" class="tab-pane fade in">
+                            <div id="request-xml-editor-new"></div>
+                        </div>
+                        <div id="edit-request-raw-tab-new" class="tab-pane fade in active">
+                            <textarea class="form-control" rows="10" cols="60" id="request-body-new" name="request-body"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Response</h3>
+                </div>
+
+                <ul class="nav nav-tabs" style="margin: 5px">
+                    <li class="active"><a data-toggle="tab" href="#successful-response-tab-new">Successful</a></li>
+                    <li><a data-toggle="tab" href="#faulty-response-tab-new">Faulty</a></li>
+                    <li><a data-toggle="tab" href="#proxy-response-tab-new">Proxy</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="successful-response-tab-new" class="tab-pane fade in active">
+                        <div class="panel-body">
+                            <div>
+                                <label>Response status code</label> <input type="text" value="200" class="short"
+                                                                           id="response-status-code-new"
+                                                                           name="response-status-code"./>
+                            </div>
+                            <div>
+                                <label>Response delay</label> <input type="text" name="response-delay" placeholder="e.g. 10" class="short"
+                                                                     id="response-delay-new"./><span title="milliseconds" data-toggle="tooltip">ms</span>
+                            </div>
+                            <div>
+                                <label>Response fault</label>
+                                <select name="response-fault" id="response-fault-new">
+                                    <option value=""></option>
+                                    <option value="CLOSE_CONNECTION_AFTER_HALF_RESPONSE">Close connection after half of response</option>
+                                    <option value="DRIP_BYTE_EVERY_100ms">Dripping bytes (100ms each)</option>
+                                    <option value="DRIP_BYTE_EVERY_1s">Slow dripping bytes (1s each)</option>
+                                    <option value="DRIP_BYTE_EVERY_10s">Very slow dripping bytes (10s each)</option>
+                                </select>
+                            </div>
+                            <label>Response headers</label>
+                            <a target="_blank" href="../help.html#dynamic-responses"><i class="glyphicon glyphicon-question-sign" title="Learn what extensions are available" aria-hidden="true"></i></a>
+                            <textarea class="form-control" rows="2" cols="60"
+                                      id="response-headers-new"
+                                      name="response-headers"></textarea>
+                            <label>Response body</label>
+                            <a target="_blank" href="../help.html#dynamic-responses"><i class="glyphicon glyphicon-question-sign" title="Learn what extensions are available" aria-hidden="true"></i></a>
+                            <ul class="nav nav-tabs" style="margin: 5px">
+                                <li><a data-toggle="tab" href="#edit-response-xml-tab-new">XML</a></li>
+                                <li class="active"><a data-toggle="tab" href="#edit-response-raw-tab-new">Raw</a></li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div id="edit-response-xml-tab-new" class="tab-pane fade in">
+                                    <div id="response-xml-editor-new"></div>
+                                </div>
+                                <div id="edit-response-raw-tab-new" class="tab-pane fade in active">
+                                    <textarea class="form-control" rows="8" cols="60" id="response-body-new" name="response-body"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="faulty-response-tab-new" class="tab-pane fade in">
+                        <div class="panel-body">
+                            <label for="faulty-response-new">Response</label>
+                            <select name="faulty-response" id="faulty-response-new">
+                                <option value=""></option>
+                                <option value="EMPTY_RESPONSE">Empty response</option>
+                                <option value="MALFORMED_RESPONSE_CHUNK">Malformed response chunk</option>
+                                <option value="RANDOM_DATA_THEN_CLOSE">Random data and close</option>
+                                <option value="INCORRECT_SMALL_CONTENT_LENGTH">Incorrect too small Content-length</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="proxy-response-tab-new" class="tab-pane fade in">
+                        <div class="panel-body">
+                           <label for="faulty-response-new">Base URL</label>
+                           <input type="text" placeholder="e.g. http://example.com" name="response-proxy-url" id="response-proxy-url-new" class="long"./>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading collapse-link">
+                        <h6 class="panel-title collapse-title">
+                            <a data-toggle="collapse"
+                               id="advanced-recording-parameters-header-new"
+                               data-target="#collapseConfiguration-new"
+                               href="#collapseConfiguration-new" class="collapsed">Advanced parameters</a>
+                        </h6>
+                    </div>
+
+                    <div id="collapseConfiguration-new" class="panel-collapse collapse form-inline">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div>
+                                        <label for="scenario-name">Scenario name:</label>
+                                        <input class="form-control" id="scenario-name-new"
+                                               name="scenario-name"
+                                               placeholder="e.g. User login">
+                                        <label for="required-scenario-state">Required scenario state:</label>
+                                        <input class="form-control" id="required-scenario-state-new"
+                                               name="required-scenario-state"
+                                               placeholder="e.g. Started">
+                                        <label for="new-scenario-state">New scenario state:</label>
+                                        <input class="form-control" id="new-scenario-state-new"
+                                               name="new-scenario-state"
+                                               placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="soap-message-signer-new">SOAP message signer:</label>
+                                    <select name="soap-message-signer" id="soap-message-signer-new">
+                                        <!-- This field is not yet used, need to implement reading a list of keys from the jks file here, etc. -->
+                                        <option value="">none (do not sign SOAP messages)</option>
+                                        <option value="trafficparrot">trafficparrot</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <button type="submit" class="btn btn-success btn-lg btn-block add">Save</button>
+        </div>
+        <div class="col-md-3">
+            <button type="button" id="cancel-new" class="btn btn-default btn-lg btn-block add" type="reset">Cancel</button>
+        </div>
+
+        <div class="col-md-6">
+            <div id="flash-message-success-new" style="display: none">
+                <div class="alert alert-success" role="alert">
+                    <strong>Saved!</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div id="stubbing-unsuccessful-new" style="display: none">
+                <div class="alert alert-danger" role="alert">
+                    <h4>Error!</h4>
+                    <strong>unknown error</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+<style>
+    .modal-lg {
+        width: 90%;
+    }
+
+    .modal-lg .edit-mapping-form .col-md-6, .modal-lg .edit-mapping-form .col-md-12 {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+</style>
+
+<div class="modal fade" role="dialog" id="edit-mapping-modal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Edit mapping</h4>
+            </div>
+            <div class="modal-body">
+
+<link rel="stylesheet" href="./ladda-0.9.4/ladda-themeless.min.css">
+<script src="./ladda-0.9.4/spin.min.js"></script>
+<script src="./ladda-0.9.4/ladda.min.js"></script>
+<style>
+    .ladda-spinner div[role="progressbar"] {
+        margin-left: 10px;
+        margin-top: -12px
+    }
+</style>
+
+<script src="./EditMappingFormController.js?version=5.11.1"></script>
+<script>
+    $(function () {
+        new EditMappingFormController().attachHttpEventListeners('edit-mapping-form', 'closeModal');
+        new XmlEditor('request', 'edit-mapping-form').attachEditRequestXmlListeners();
+        new XmlEditor('response', 'edit-mapping-form').attachEditResponseXmlListeners();
+    });
+</script>
+
+<form id="add-request-response-form-edit-mapping-form" name="add-request-response-form" method="POST" action="./prime" class="edit-mapping-form">
+    <input type="hidden" name="mapping-id" id="mapping-id" value="">
+    <input type="hidden" name="mapping-name" id="mapping-name" value="">
+    <input type="hidden" name="mapping-tags" id="mapping-tags" value="">
+    <input type="hidden" name="response-body-file-name" id="response-body-file-name" value="">
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Request</h3>
+                </div>
+                <div class="panel-body">
+                    <div>
+                        <label>Request URL</label>
+                        <select name="request-url-matcher" id="request-url-matcher-edit-mapping-form">
+                            <option value="urlEqualTo">equal to</option>
+                            <option value="urlMatching">matches regex</option>
+                            <option value="urlPathEqualTo">path equal to</option>
+                            <option value="urlPathMatching">path matches regex</option>
+                        </select>
+                        <input type="text" placeholder="e.g. /api/example" name="request-url"
+                               id="request-url-edit-mapping-form"
+                               class="long"./>
+                    </div>
+                    <div>
+                        <label>Request method</label>
+                        <select name="request-method" id="request-method-edit-mapping-form">
+                            <option value="ANY">ANY</option>
+                            <option value="GET">GET</option>
+                            <option value="POST">POST</option>
+                            <option value="PUT">PUT</option>
+                            <option value="HEAD">HEAD</option>
+                            <option value="OPTIONS">OPTIONS</option>
+                            <option value="DELETE">DELETE</option>
+                            <option value="CONNECT">CONNECT</option>
+                            <option value="TRACE">TRACE</option>
+                        </select>
+                    </div>
+                    <label>Request headers</label> <textarea class="form-control" rows="2" cols="60"
+                                                             name="request-headers"
+                                                             id="request-headers-edit-mapping-form"></textarea>
+
+                    <div>
+                        <label>Request priority</label> <input type="text" name="request-priority" placeholder="e.g. 10" class="short" id="request-priority-edit-mapping-form" data-toggle="tooltip" title="1 is highest. Default is 5 if left blank."./>
+                    </div>
+
+                    <div>
+                        <label>Request body</label>
+                        <select name="request-body-matcher" id="request-body-matcher-edit-mapping-form">
+                            <option value="any">any</option>
+                            <option value="equalTo">equal to</option>
+                            <option value="contains">contains</option>
+                            <option value="matches">matches regexp</option>
+                            <option value="doesNotMatch">does not match regexp</option>
+                            <option value="equalToJson">equal to JSON</option>
+                            <option value="matchesJson">matches JSON</option>
+                            <option value="matchesJsonPath">matches JSONPath</option>
+                            <option value="equalToXml">equal to XML</option>
+                            <option value="matchesXml">matches XML</option>
+                            <option value="matchesXPath">matches XPath</option>
+                        </select>
+                    </div>
+
+                    <ul class="nav nav-tabs" style="margin: 5px">
+                        <li><a data-toggle="tab" href="#edit-request-xml-tab-edit-mapping-form">XML</a></li>
+                        <li class="active"><a data-toggle="tab" href="#edit-request-raw-tab-edit-mapping-form">Raw</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="edit-request-xml-tab-edit-mapping-form" class="tab-pane fade in">
+                            <div id="request-xml-editor-edit-mapping-form"></div>
+                        </div>
+                        <div id="edit-request-raw-tab-edit-mapping-form" class="tab-pane fade in active">
+                            <textarea class="form-control" rows="10" cols="60" id="request-body-edit-mapping-form" name="request-body"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Response</h3>
+                </div>
+
+                <ul class="nav nav-tabs" style="margin: 5px">
+                    <li class="active"><a data-toggle="tab" href="#successful-response-tab-edit-mapping-form">Successful</a></li>
+                    <li><a data-toggle="tab" href="#faulty-response-tab-edit-mapping-form">Faulty</a></li>
+                    <li><a data-toggle="tab" href="#proxy-response-tab-edit-mapping-form">Proxy</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="successful-response-tab-edit-mapping-form" class="tab-pane fade in active">
+                        <div class="panel-body">
+                            <div>
+                                <label>Response status code</label> <input type="text" value="200" class="short"
+                                                                           id="response-status-code-edit-mapping-form"
+                                                                           name="response-status-code"./>
+                            </div>
+                            <div>
+                                <label>Response delay</label> <input type="text" name="response-delay" placeholder="e.g. 10" class="short"
+                                                                     id="response-delay-edit-mapping-form"./><span title="milliseconds" data-toggle="tooltip">ms</span>
+                            </div>
+                            <div>
+                                <label>Response fault</label>
+                                <select name="response-fault" id="response-fault-edit-mapping-form">
+                                    <option value=""></option>
+                                    <option value="CLOSE_CONNECTION_AFTER_HALF_RESPONSE">Close connection after half of response</option>
+                                    <option value="DRIP_BYTE_EVERY_100ms">Dripping bytes (100ms each)</option>
+                                    <option value="DRIP_BYTE_EVERY_1s">Slow dripping bytes (1s each)</option>
+                                    <option value="DRIP_BYTE_EVERY_10s">Very slow dripping bytes (10s each)</option>
+                                </select>
+                            </div>
+                            <label>Response headers</label>
+                            <a target="_blank" href="../help.html#dynamic-responses"><i class="glyphicon glyphicon-question-sign" title="Learn what extensions are available" aria-hidden="true"></i></a>
+                            <textarea class="form-control" rows="2" cols="60"
+                                      id="response-headers-edit-mapping-form"
+                                      name="response-headers"></textarea>
+                            <label>Response body</label>
+                            <a target="_blank" href="../help.html#dynamic-responses"><i class="glyphicon glyphicon-question-sign" title="Learn what extensions are available" aria-hidden="true"></i></a>
+                            <ul class="nav nav-tabs" style="margin: 5px">
+                                <li><a data-toggle="tab" href="#edit-response-xml-tab-edit-mapping-form">XML</a></li>
+                                <li class="active"><a data-toggle="tab" href="#edit-response-raw-tab-edit-mapping-form">Raw</a></li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div id="edit-response-xml-tab-edit-mapping-form" class="tab-pane fade in">
+                                    <div id="response-xml-editor-edit-mapping-form"></div>
+                                </div>
+                                <div id="edit-response-raw-tab-edit-mapping-form" class="tab-pane fade in active">
+                                    <textarea class="form-control" rows="8" cols="60" id="response-body-edit-mapping-form" name="response-body"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="faulty-response-tab-edit-mapping-form" class="tab-pane fade in">
+                        <div class="panel-body">
+                            <label for="faulty-response-edit-mapping-form">Response</label>
+                            <select name="faulty-response" id="faulty-response-edit-mapping-form">
+                                <option value=""></option>
+                                <option value="EMPTY_RESPONSE">Empty response</option>
+                                <option value="MALFORMED_RESPONSE_CHUNK">Malformed response chunk</option>
+                                <option value="RANDOM_DATA_THEN_CLOSE">Random data and close</option>
+                                <option value="INCORRECT_SMALL_CONTENT_LENGTH">Incorrect too small Content-length</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="proxy-response-tab-edit-mapping-form" class="tab-pane fade in">
+                        <div class="panel-body">
+                           <label for="faulty-response-edit-mapping-form">Base URL</label>
+                           <input type="text" placeholder="e.g. http://example.com" name="response-proxy-url" id="response-proxy-url-edit-mapping-form" class="long"./>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading collapse-link">
+                        <h6 class="panel-title collapse-title">
+                            <a data-toggle="collapse"
+                               id="advanced-recording-parameters-header-edit-mapping-form"
+                               data-target="#collapseConfiguration-edit-mapping-form"
+                               href="#collapseConfiguration-edit-mapping-form" class="collapsed">Advanced parameters</a>
+                        </h6>
+                    </div>
+
+                    <div id="collapseConfiguration-edit-mapping-form" class="panel-collapse collapse form-inline">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div>
+                                        <label for="scenario-name">Scenario name:</label>
+                                        <input class="form-control" id="scenario-name-edit-mapping-form"
+                                               name="scenario-name"
+                                               placeholder="e.g. User login">
+                                        <label for="required-scenario-state">Required scenario state:</label>
+                                        <input class="form-control" id="required-scenario-state-edit-mapping-form"
+                                               name="required-scenario-state"
+                                               placeholder="e.g. Started">
+                                        <label for="new-scenario-state">New scenario state:</label>
+                                        <input class="form-control" id="new-scenario-state-edit-mapping-form"
+                                               name="new-scenario-state"
+                                               placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="soap-message-signer-edit-mapping-form">SOAP message signer:</label>
+                                    <select name="soap-message-signer" id="soap-message-signer-edit-mapping-form">
+                                        <!-- This field is not yet used, need to implement reading a list of keys from the jks file here, etc. -->
+                                        <option value="">none (do not sign SOAP messages)</option>
+                                        <option value="trafficparrot">trafficparrot</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <button type="submit" class="btn btn-success btn-lg btn-block add">Save</button>
+        </div>
+        <div class="col-md-3">
+            <button type="button" id="cancel-edit-mapping-form" class="btn btn-default btn-lg btn-block add" data-dismiss='modal'>Cancel</button>
+        </div>
+
+        <div class="col-md-6">
+            <div id="flash-message-success-edit-mapping-form" style="display: none">
+                <div class="alert alert-success" role="alert">
+                    <strong>Saved!</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div id="stubbing-unsuccessful-edit-mapping-form" style="display: none">
+                <div class="alert alert-danger" role="alert">
+                    <h4>Error!</h4>
+                    <strong>unknown error</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="./MappingListController.js?version=5.11.1"></script>
+<script src="./EditMappingModalController.js?version=5.11.1"></script>
+<script>
+    $(function () {
+        new MappingListController('httpMappingsUrl', null, true, true).startProgressBar().scheduleReloadMappingsList(1000);
+        new EditMappingModalController().attachEvents();
+    });
+</script>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" data-target="#mappingsList" href="#mappingsList">
+                Mappings
+            </a>
+        </h4>
+    </div>
+    <div id="mappingsList" class="panel-collapse">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>URL</th>
+                    <th>Method</th>
+                    <th>Request body</th>
+                    <th>Response body</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="loading">
+                    <td colspan="6">
+                        <div class="progress">
+                            <div id="loading-mappings-progress-bar" class="progress-bar progress-bar-info"
+                                 role="progressbar" aria-valuenow="20"
+                                 aria-valuemin="0" aria-valuemax="100" style="width: 10%">
+                                Loading...
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+</div>
+
+<script>
+    $(function () {
+        'use strict';
+        $('#fileupload').fileupload({
+            url: "http://" + location.hostname + ":" + location.port + "./httpSkeletons",
+            dataType: 'json',
+            method: 'PUT',
+            autoUpload: true
+        }).on('fileuploaddone', function (e, data) {
+            new SkeletonDropdownController("skeletons", "http://" + location.hostname + ":" + location.port + "./httpSkeletons").loadSkeletonsToSelectDropdown();
+            new FlashMessageController().flashSuccessMessage(data.response().result.result);
+        }).on('fileuploadfail', function (e, data) {
+            var xhr = data.response().jqXHR;
+            logAjaxError(xhr, e);
+            new FlashMessageController().flashErrorMessageXhr("Problem uploading HTTP specifications: ", xhr);
+        }).prop('disabled', !$.support.fileInput)
+                .parent().addClass($.support.fileInput ? undefined : 'disabled');
+    });
+</script>
+
+<div id="footer">
+    <div class="container" style="text-align: right">
+        <p class="muted credit">Copyright &copy; 2014-<span><script>document.write(new Date().getFullYear())</script></span>
+            <a href="https://trafficparrot.com?utm_source=tp-binary-footer">Traffic Parrot</a>.
+        </p>
+    </div>
+</div>
+
+</body>
+</html>
+
+
